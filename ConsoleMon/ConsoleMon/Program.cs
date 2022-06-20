@@ -1,4 +1,7 @@
 ﻿using System;
+using System.IO;
+using ConsoleMonsters.Loaders;
+using ConsoleMonsters.Tools;
 
 namespace ConsoleMon
 {
@@ -6,7 +9,14 @@ namespace ConsoleMon
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            ConsoleMonFactory factory = new ConsoleMonFactory();
+            factory.Load();
+
+            ConsoleMon a = factory.Make("EnterMon");
+            ConsoleMon b = factory.Make("NewLineMon");
+
+            ConsoleMonArena arena = new ConsoleMonArena();
+            arena.DoBattle(a, b);
         }
     }
 }

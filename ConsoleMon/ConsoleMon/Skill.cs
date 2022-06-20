@@ -8,11 +8,11 @@ namespace ConsoleMon
 {
     internal class Skill
     {
-        Elementen element = Elementen.Vuur;
+        internal Elementen element = Elementen.Fire;
 
-        int damage;
-        int energyCost;
-        string name;
+        internal int damage;
+        internal int energyCost;
+        internal string name;
 
         internal Skill()
         {
@@ -26,7 +26,7 @@ namespace ConsoleMon
             this.name = copyFrom.name;
         }
 
-        void UseOn(ConsoleMon target, ConsoleMon caster)
+        public void UseOn(ConsoleMon target, ConsoleMon caster)
         {
             caster.DepleteEnergy(energyCost);
             target.TakeDamage(damage);

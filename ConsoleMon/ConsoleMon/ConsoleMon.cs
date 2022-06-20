@@ -8,21 +8,23 @@ namespace ConsoleMon
 {
     internal enum Elementen
     {
-        Lucht,
-        Aarde,
-        Vuur,
+        Fire,
+        Elec,
+        Dark,
+        Physical,
         Water
     }
 
-    class ConsoleMon
+    internal class ConsoleMon
     {
-        List<Skill> skills = new List<Skill>();
+        internal List<Skill> skills = new List<Skill>();
 
-        Elementen weakness = Elementen.Water;
+        internal Elementen weakness = Elementen.Elec;
 
         internal int health;
         internal int energy;
         internal string name;
+        internal string monsterType;
 
         internal ConsoleMon()
         {
@@ -36,7 +38,7 @@ namespace ConsoleMon
             this.name = copyFrom.name;
             this.skills = copyFrom.skills;
 
-            for(int i = 0; i < copyFrom.skills.Count; i++)
+            for (int i = 0; i < copyFrom.skills.Count; i++)
             {
                 Skill copyFromThisSkill = copyFrom.skills[i];
                 Skill clone = new Skill(copyFromThisSkill);
@@ -52,6 +54,26 @@ namespace ConsoleMon
         internal void DepleteEnergy(int energy)
         {
             this.energy -= energy;
+        }
+    }
+
+    internal class ConsoleMonArena
+    {
+        public void DoBattle(ConsoleMon a, ConsoleMon b)
+        {
+            Random random = new Random();
+
+            Skill skillA = a.skills[random.Next(2)];
+            Skill skillB = b.skills[random.Next(2)];
+
+            while (a.health > 0 || b.health > 0)
+            {
+                skillA.UseOn(b, a);
+                skillB.UseOn(a, b);
+
+                Console.WriteLine(a.health);
+                Console.WriteLine(b.health);
+            }
         }
     }
 }
